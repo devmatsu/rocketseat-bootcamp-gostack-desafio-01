@@ -7,7 +7,7 @@ let projects = [];
 
 // Crie um middleware global chamado em todas requisições que imprime (console.log)
 // uma contagem de quantas requisições foram feitas na aplicação até então
-server.use('/projects', (req, res, next) => {
+server.use('/', (req, res, next) => {
   countReq++;
   console.log(`\nIncoming Method: ${req.method} | Incoming URL: ${req.originalUrl}`);
   console.log(`Quantidade de requisições feitas: ${countReq}\n`);
@@ -33,6 +33,16 @@ function checkID(req, res, next) {
 // A rota deve receber id e title dentro corpo de cadastrar um novo projeto
 // dentro de um array no seguinte formato: { id: "1", title: 'Novo projeto', tasks: [] }
 server.post('/projects', (req, res) => {
+  // const { id, title } = req.body;
+
+  // const project = {
+  //   id,
+  //   title,
+  //   tasks: []
+  // };
+
+  // projects.push(project);
+
   projects.push(req.body)
 
   return res.send('Cadastrado com sucesso!');
@@ -49,6 +59,8 @@ server.put('/projects/:id', checkID, (req, res) => {
   const { title } = req.body;
   let oldTitle;
 
+  //const project = projects.find(p => p.id === id);
+
   for (let k in projects) {
     if (projects[k].id == id) {
       oldTitle = projects[k].title;
@@ -63,6 +75,8 @@ server.put('/projects/:id', checkID, (req, res) => {
 server.delete('/projects/:id', checkID, (req, res) => {
   const { id } = req.params;
 
+  //const projectIndex = projects.findIndex(p => p.id === id);
+
   for (let k in projects) {
     if (projects[k].id == id) {
       projects.splice(k, 1);
@@ -76,6 +90,8 @@ server.delete('/projects/:id', checkID, (req, res) => {
 server.post('/projects/:id/tasks', checkID, (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
+
+  //const project = projects.find(p => p.id === id);
 
   for (let k in projects) {
     if (projects[k].id == id) {
