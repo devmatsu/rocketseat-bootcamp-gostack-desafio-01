@@ -1,2 +1,2 @@
 # rocketseat-desafio01
-Challenge from RocketSeat [module01 - challenge01]
+Challenge from RocketSeat - Bootcamp GoStack [module01 - challenge01]
